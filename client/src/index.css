@@ -21,7 +21,8 @@
 h1,
 ul,
 li,
-span {
+span,
+p {
   background: transparent;
 }
 

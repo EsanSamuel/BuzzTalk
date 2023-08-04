@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { AiOutlineSend } from 'react-icons/ai'
 import io from 'socket.io-client'
 const socket = io.connect('http://localhost:3001')
+import { AuthContext } from '../Context/Auth'
 
 const Comment = () => {
   const [message, setMessage] = useState('')
   const [messageReceived, setMessageReceived] = useState([])
   const { name } = useParams()
+  const { users } = useContext(AuthContext)
 
   const sendReplies = () => {
     if (message !== '') {
       const messageData = {
         date: new Date(),
-        message: message
+        message: message,
+        author: users.displayName
       }
       socket.emit('send_message', messageData)
     }
@@ -58,6 +61,7 @@ const Comment = () => {
         <div className=' mt-10'>
           {messageReceived.map((message) => (
             <div className='text-[15px] flex'>
+              <h1 className='text-white'>{message.author}</h1>
               <h1 className='bg-[#3a3a43] mt-5 rounded-r-[20px] p-2  float-left w-auto'>{message}</h1>
             </div>
           ))}

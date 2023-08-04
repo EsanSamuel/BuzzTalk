@@ -9,9 +9,19 @@ dotenv.config()
 const router = express.Router()
 
 router.route('/').post(async (req, res) => {
-    Auth.create(req.body).
-        then(auth => res.json(auth))
-        .catch((err) => console.log(err))
+    const { name, password, email } = req.body
+
+    try {
+        const auth = await Auth.create({
+            name,
+            password,
+            email
+        })
+        res.status(200).json({ success: true, data: auth })
+    } catch (error) {
+        res.status(400).json({ success: false, message: error })
+    }
+
 
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Comment, CreatePost, Home } from './pages'
+import { Comment, CreatePost, Home, Swipe, Signin, Login, NewsFeed } from './pages'
 
 const App = () => {
   return (
@@ -9,9 +9,13 @@ const App = () => {
 
 
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Swipe />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/create' element={<CreatePost />} />
         <Route path='/comment/:name' element={<Comment />} />
+        <Route path='/signin' element={<Signin />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/news' element={<NewsFeed />} />
       </Routes>
 
 

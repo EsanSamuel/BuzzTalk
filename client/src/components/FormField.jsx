@@ -6,7 +6,7 @@ const FormField = ({ handleChange, value, type, name, title, placeholder, isText
             <label className=''>
                 <span className='text-[#3a3a43]  py-3 pb-5'>{title}</span>
                 {isTextArea ? (
-                    <textarea className='bg-[#1c1c24] w-full mt-5 h-[45px] rounded p-3  outline-[#8c6dfd] '
+                    <textarea className='bg-transparent border border-[#5f5f5f] w-full mt-5 h-[45px] rounded p-3  outline-[#8c6dfd] '
                         onChange={handleChange}
                         value={value}
                         type={type}
@@ -15,7 +15,7 @@ const FormField = ({ handleChange, value, type, name, title, placeholder, isText
                         placeholder={placeholder}
                     />
                 ) : (
-                    <input className='bg-[#1c1c24] w-full mt-5 h-[45px] rounded p-3  outline-[#8c6dfd] '
+                    <input className='bg-transparent  border border-[#5f5f5f] w-full mt-5 h-[45px] rounded p-3  outline-[#8c6dfd] '
                         onChange={handleChange}
                         value={value}
                         type={type}

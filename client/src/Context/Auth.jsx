@@ -15,18 +15,14 @@ export const AuthProvider = ({ children }) => {
             setLoading(true)
             setUser(user)
             if (user) {
-                console.log("state = definitely signed in")
+                navigate('/home')
             }
-            else {
-                console.log("state = definitely signed out")
-            }
-            //navigate('/')
         })
     }, [user])
 
     const users = auth.currentUser
 
-    if (users !== null) {
+    if (users !== null && null !== users) {
         // The user object has basic properties such as display name, email, etc.
         const displayName = users.displayName;
         const email = users.email;

@@ -48,11 +48,16 @@ router.route('/').post(async (req, res) => {
     }
 })
 
-router.route('/').delete(async (req, res) => {
+router.route('/').put(async (req, res) => {
     try {
-        const posts = await Post.findOne({})
+        const deleteposts = await Post.findByIdAndUpdate(req.body.postId,
+            {
+                $push: { likes: req.user._id }
+            }, {
+            new: true
+        })
 
-        res.status(200).json({ success: true, data: posts })
+        res.status(200).json({ success: true, data: deleteposts })
     } catch (error) {
         res.status(500).json({ success: false, message: error })
     }

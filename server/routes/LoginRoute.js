@@ -12,10 +12,13 @@ router.route('/').post(async (req, res) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    res.json('success')
+                    res.json('Success')
                 } else {
-                    res.json('Something went wrong!')
+                    res.json('Incorrect password!')
+
                 }
+            } else {
+                res.json('User does not exists')
             }
         })
 })

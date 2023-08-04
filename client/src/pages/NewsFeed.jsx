@@ -1,66 +1,77 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button } from './'
-import { AiOutlineUser, AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-import { auth, provider } from './Firebase'
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { useContext } from 'react'
-import { AuthContext } from '../Context/Auth'
+import React, { useEffect, useState } from 'react'
+import { shorten2 } from '../utils/constant'
+import { BsThreeDots } from 'react-icons/bs'
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { AiOutlineHome } from 'react-icons/ai'
 import { TbSocial } from 'react-icons/tb'
 import { RiCommunityLine, RiNftFill } from 'react-icons/ri'
 import { BiNews } from 'react-icons/bi'
+import { Link, useNavigate } from 'react-router-dom'
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "#8c6dfd",
+};
 
 
-const Navbar = () => {
+const NewsFeed = () => {
+    const [thread, setThread] = useState([])
     const [navbar, setNavbar] = useState(false)
     const [isActive, setIsActive] = useState(false)
-    const signin = () => {
-        provider.setCustomParameters({ prompt: 'select_account' })
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const credentails = GoogleAuthProvider.credentialFromResult(result)
-                const token = credentails.accessToken
-                const user = credentails.user
+
+    useEffect(() => {
+        fetch('https://newsapi.org/v2/everything?q=apple&from=2023-08-03&to=2023-08-03&sortBy=popularity&pageSize=100&apiKey=716a8281ffbf435f94206cf2c4b2c6b0')
+            .then(res => res.json())
+            .then(data => {
+                //console.log(data)
+                setThread(data.articles)
             })
-            .catch((error) => {
-                console.log(error)
-            })
-    }
-
-    const signout = async () => {
-        await auth.signOut()
-        navigate('/login')
-    }
-    const { users, user } = useContext(AuthContext)
-
-
-    const navigate = useNavigate()
+    }, [])
     return (
-        <div className='flex justify-between gap-3 sm:px-3 bg-[#1c1c24] px-5 py-3 rounded card'>
-            <input className='sm:w-[400px] w-full h-[35px] border-none rounded-[100px] p-3 bg-[#3a3a43] outline-none text-[#eaeaea]'
-                placeholder='Search...'
-
-            />
-            {!navbar && <AiOutlineMenu onClick={() => setNavbar(true)} className='sm:hidden text-[#e1d9d1] text-[25px] mt-2 bg-transparent' />}
-            {navbar && <AiOutlineClose onClick={() => setNavbar(false)} className='sm:hidden text-[#e1d9d1] text-[25px] mt-2 bg-transparent' />}
-            <div className='flex gap-3 bg-transparent sm:flex hidden'>{signin && <img src={users.photoURL} className='w-[40px] h-[40px rounded-full' />}{signin ? (
-                <button onClick={() => signin()} className='xl:flex hidden bg-transparent rounded-[100px] border border-[#5f5f5f] py-1 px-3 text-[#e1d9d1]'><AiOutlineUser className='bg-transparent text-[30px] text-[#5f5f5f] ' /><span className='mt-1'>Sign Up</span></button>
-            ) : (
-                <button onClick={() => signout()} className='xl:flex hidden bg-transparent rounded-[100px] border border-[#5f5f5f] py-1 px-4 text-[#e1d9d1]'><span className='mt-1'>Sign Out</span></button>
-            )}
+        <div className='p-5 text-white'>
+            <div className='flex justify-between'>
+                <h1 className='logo text-[25px]'>BuzzTalk</h1>
+                {!navbar && <AiOutlineMenu onClick={() => setNavbar(true)} className='text-[#e1d9d1] text-[25px] mt-2 bg-transparent' />}
+                {navbar && <AiOutlineClose onClick={() => setNavbar(false)} className=' text-[#e1d9d1] text-[25px] mt-2 bg-transparent' />}
             </div>
-
+            <div className='bg-[#1c1c24] w-full mt-5 rounded h-auto card text-center p-4'>
+                <h1 className='pb-7 text-left'>Today's Threading</h1>
+                {thread?.length > 0 ? (
+                    <div className='bg-transparent'>
+                        {thread.map((data) => (
+                            <a href={data.url}><div key={data.id} className='bg-transparent cursor-pointer '>
+                                <div className='flex justify-between bg-transparent gap-5'>
+                                    <h1 className='text-[12px]   text-left text-[#eaeaea]  hover:text-[#26a7de] '>{shorten2(data.title)}</h1><BsThreeDots className='bg-transparent' />
+                                </div>
+                                <p className='text-left text-[10px] pb-5 text-[#5f5f5f]'>{data.publishedAt}</p>
+                            </div></a>
+                        ))}
+                    </div>
+                ) : (
+                    <div className='text-center bg-transparent mt-10'>
+                        <ClipLoader
+                            color='#fff'
+                            cssOverride={override}
+                            size={150}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    </div>
+                )}
+            </div>
+            {/*navbar here*/}
 
             {navbar && (
-                <div className='z-10 bg-[#1c1c24] p-10 rounded card top-0 left-0 border-r border-[#5f5f5f] overflow-auto flex flex-col fixed animate-slide-in sm:hidden'>
+                <div className='z-10 bg-[#1c1c24] overflow-auto p-10 rounded card top-0 left-0 border-r border-[#5f5f5f] overflow-auto flex flex-col fixed animate-slide-in '>
                     <div className='bg-transparent overflow-auto'>
                         <h1 className='text-[30px] px-3 logo flex gap-3 text-[#ead9d1]'><TbSocial className='bg-transparent text-[#00dbde]' />BuzzTalk</h1>
                         <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer'>
                             <li onClick={() => setIsActive(true)} className={`flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded ${isActive && 'bg-[#3a3a43] text-[#eaeaea]'}`}><AiOutlineHome className='text-[20px] bg-transparent' /><span className=''>Home</span></li>
                             <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiCommunityLine className='text-[20px] bg-transparent' />Community</li>
+                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Marketplace</li>
                             <Link to='/news' className='bg-transparent'><li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiNftFill className='text-[20px] bg-transparent' />News feed</li></Link>
-                            <li onClick={() => signin()} className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><BiNews className='text-[20px] bg-transparent' />Sign In</li>
                         </ul>
 
                         <hr className='w-full mt-5 text-[#e1d9d1]' />
@@ -84,8 +95,7 @@ const Navbar = () => {
                 </div>
             )}
         </div>
-
     )
 }
 
-export default Navbar
+export default NewsFeed
