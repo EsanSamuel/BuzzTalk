@@ -67,7 +67,7 @@ const Signin = () => {
 
     return (
         <div className='p-5 sm:flex justify-between gap-3'>
-            <div className='bg-[#0165fc] w-auto p-10 rounded card flex flex-col text-white '>
+            <div className='bg-[#8c6dfd] w-auto p-10 rounded card flex flex-col text-white '>
                 <h1 className='pb-20'>BuzzTalk</h1>
                 <h1 className='text-[40px] text-white pb-10 '>Start your journey with us!</h1>
                 <p className='text-[#eaeaea] pb-10'>Discover the leading social media platform and join us by signing up!</p>
@@ -85,7 +85,7 @@ const Signin = () => {
                     <Input className='' title='Enter Password' placeholder='Enter password..' handleChange={(e) => setPassword(e.target.value)} type='password' />
                 </div>
 
-                <button onClick={handleSubmit} className='bg-[#0165fc] text-white py-3 px-10 flex flex-start rounded'>Submit</button>
+                <button onClick={handleSubmit} className='bg-[#8c6dfd] text-white py-3 px-10 flex flex-start rounded'>Submit</button>
 
                 <button onClick={signin} className='w-full border mt-10 p-3 rounded border-[#5f5f5f] text-white'><FcGoogle className='bg-transparent text-[20px] absolute' />Sign in with Google</button>
             </div>

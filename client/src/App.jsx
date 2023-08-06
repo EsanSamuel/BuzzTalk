@@ -12,7 +12,7 @@ const App = () => {
         <Route path='/' element={<Swipe />} />
         <Route path='/home' element={<Home />} />
         <Route path='/create' element={<CreatePost />} />
-        <Route path='/comment/:name' element={<Comment />} />
+        <Route path='/comment/:_id/:name/:details' element={<Comment />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/login' element={<Login />} />
         <Route path='/news' element={<NewsFeed />} />

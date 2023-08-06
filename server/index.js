@@ -5,6 +5,7 @@ import connectDB from './mongoDB/connect.js'
 import postRoutes from './routes/PostRoutes.js'
 import RegisterRoute from './routes/RegisterRoute.js'
 import LoginRoute from './routes/LoginRoute.js'
+import CommentRoute from './routes/CommentRoute.js'
 import { Server } from 'socket.io'
 import http from 'http'
 
@@ -24,6 +25,7 @@ app.use(express.json({ limit: '50mb' }))
 app.use('/api/v1/post', postRoutes)
 app.use('/api/v1/register', RegisterRoute)
 app.use('/api/v1/login', LoginRoute)
+app.use('/api/v1/comment', CommentRoute)
 
 app.get('/', async (req, res) => {
     res.send('Hello from server!')

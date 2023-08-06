@@ -4,6 +4,7 @@ import { v2 as cloudinary } from 'cloudinary'
 import cors from 'cors'
 
 import Post from '../mongoDB/models/post.js'
+import Comment from '../mongoDB/models/comment.js'
 
 dotenv.config()
 
@@ -62,5 +63,6 @@ router.route('/').put(async (req, res) => {
         res.status(500).json({ success: false, message: error })
     }
 })
+
 
 export default router

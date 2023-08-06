@@ -57,7 +57,7 @@ const Navbar = () => {
                     <div className='bg-transparent overflow-auto'>
                         <h1 className='text-[30px] px-3 logo flex gap-3 text-[#ead9d1]'><TbSocial className='bg-transparent text-[#00dbde]' />BuzzTalk</h1>
                         <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer'>
-                            <li onClick={() => setIsActive(true)} className={`flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded ${isActive && 'bg-[#3a3a43] text-[#eaeaea]'}`}><AiOutlineHome className='text-[20px] bg-transparent' /><span className=''>Home</span></li>
+                           <Link to='/home' className='bg-transparent'> <li onClick={() => setIsActive(true)} className={`flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded ${isActive && 'bg-[#3a3a43] text-[#eaeaea]'}`}><AiOutlineHome className='text-[20px] bg-transparent' /><span className=''>Home</span></li></Link>
                             <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiCommunityLine className='text-[20px] bg-transparent' />Community</li>
                             <Link to='/news' className='bg-transparent'><li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiNftFill className='text-[20px] bg-transparent' />News feed</li></Link>
                             <li onClick={() => signin()} className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><BiNews className='text-[20px] bg-transparent' />Sign In</li>

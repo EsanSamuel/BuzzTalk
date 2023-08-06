@@ -106,7 +106,7 @@ const Home = () => {
                             </div>
 
                             <div className='bg-transparent'>
-                                <Link to='/create'><button className='hover:opacity-50 rounded-[100px] bg-[#26a7de] py-2 text-[18px] px-5'>Post</button></Link>
+                                <Link to='/create'><button className='hover:opacity-50 rounded-[100px] bg-[#8c6dfd] py-2 text-[18px] px-5'>Post</button></Link>
                             </div>
                         </div>
 
@@ -154,7 +154,7 @@ const Home = () => {
                                     <Link to='/news'><h1 className='text-[#26a7de] cursor-pointer'>View more</h1></Link>
                                 </div>
                             ) : (
-                                <div className='text-center bg-transparent mt-10'>
+                                <div className='text-center bg-transparent mt-10 pb-10'>
                                     <ClipLoader
                                         color='#fff'
                                         loading={loading}

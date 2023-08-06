@@ -4,12 +4,20 @@ import { AiOutlineSend } from 'react-icons/ai'
 import io from 'socket.io-client'
 const socket = io.connect('http://localhost:3001')
 import { AuthContext } from '../Context/Auth'
+import { useNavigate } from 'react-router-dom'
 
 const Comment = () => {
   const [message, setMessage] = useState('')
   const [messageReceived, setMessageReceived] = useState([])
-  const { name } = useParams()
+  const { _id, name } = useParams()
   const { users } = useContext(AuthContext)
+  //const Date = new Date()
+  const [form, setForm] = useState({ name: users.displayName, comments: '', ProfileImage: users.photoURL, time: new Date() })
+  const [allComments, setAllComments] = useState([])
+  const navigate = useNavigate()
+
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const sendReplies = () => {
     if (message !== '') {
@@ -43,38 +51,81 @@ const Comment = () => {
     localStorage.setItem('Message', JSON.stringify(messageReceived))
   }, [messageReceived])
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (form.comments) {
+      try {
+        const response = await fetch(`http://localhost:3001/api/v1/comment`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form)
+        })
+
+        await response.json()
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  }
+
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      //setLoading(true)
+
+      try {
+        const response = await fetch(`http://localhost:3001/api/v1/comment`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        if (response.ok) {
+          const result = await response.json()
+
+          //console.log(result.data.reverse())
+          setAllComments(result.data.reverse())
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        //setLoading(false)
+      }
+    }
+    fetchPosts()
+  }, [])
+
   return (
     <div className='w-full text-[#ead9d1] sm:p-20 p-5' onSubmit={sendReplies}>
       <h1 className='text-center'>Replies to {name}'s post</h1>
 
-      <div className='h-[70vh] mt-5'>
-        {message &&
-          <div>
-            <span className='text-[10px] float-right'>*Your reply</span><br />
-            <div className='bg-[#3a3a43] mt-1 rounded-r-[20px] p-2 w-auto float-right'>
-              {message}
-            </div>
-          </div>}
 
-
-
-        <div className=' mt-10'>
-          {messageReceived.map((message) => (
-            <div className='text-[15px] flex'>
-              <h1 className='text-white'>{message.author}</h1>
-              <h1 className='bg-[#3a3a43] mt-5 rounded-r-[20px] p-2  float-left w-auto'>{message}</h1>
-            </div>
-          ))}
+      {allComments.map((comment) => (
+        <div key={comment.id} className='p-2 rounded mt-5 flex gap-3 h-[80%]'>
+          <img src={comment.ProfileImage} className='[w-40px] h-[40px] rounded-full bg-transparent' />
+          <div className=''>
+            <p className='text-[12px] text-[#5f5f5f]'>{comment.name}</p>
+            {comment.comments}
+            <p className='text-[12px] text-[#5f5f5f]'>{comment.time}</p>
+          </div>
         </div>
-      </div>
+      ))}
 
-      <div className='w-[90%]  bg-transparent fixed bottom-0  pb-10 flex gap-3'>
+
+      <form className='w-[90%]  bg-transparent fixed bottom-0  pb-10 flex gap-3' onSubmit={handleSubmit}>
         <input className='w-full  h-[40px] rounded border p-5 border-[#5f5f5f] bg-[#3a3a43] outline-[#8c6dfd]'
           placeholder='Enter comment'
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={handleChange}
+          value={form.comments}
+          name='comments'
         />
-        <button className='bg-[#8c6dfd] hover:opacity-50 p-2 rounded' onClick={sendReplies}><AiOutlineSend className='bg-transparent text-[25px]' /></button>
-      </div>
+        <button className='bg-[#8c6dfd] hover:opacity-50 p-2 rounded' onClick={handleSubmit}><AiOutlineSend className='bg-transparent text-[25px]' /></button>
+      </form>
     </div>
   )
 }

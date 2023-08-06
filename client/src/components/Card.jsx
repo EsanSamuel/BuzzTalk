@@ -73,9 +73,9 @@ const Card = ({ _id, details, name, image, ProfileImage, like }) => {
             {/*{imageModal && (
                 <img src={image} className='rounded h-[370px] bg-transparent w-full contain p-0 a' />
             )}*/}
-            <div className='flex justify-between w-full p-5 mt-2 text-[20px]'>
+            <div className='flex justify-between w-full p-5 mt-2 text-[20px] bg-transparent'>
                 <label onClick={() => like(_id)} className={`flex gap-2 ${isActive && 'text-[#43affc]'}`}> <AiFillLike className={`bg-transparent `} /> <span className='text-[15px]'>{like.length} Likes</span></label>
-                <Link to={`/comment/${name}`}> <label className='flex gap-2'><FaCommentDots className='bg-transparent' /><span className='text-[15px]'>Comment</span></label></Link>
+                <Link to={`/comment/${_id}/${name}/${details}`}> <label className='flex gap-2'><FaCommentDots className='bg-transparent' /><span className='text-[15px]'>Comment</span></label></Link>
                 <label className='flex gap-2' onClick={() => handleSave(saved?._id)}> <AiOutlineRetweet className='bg-transparent' /><span className='text-[15px]'>Save</span></label>
             </div>
         </div>
