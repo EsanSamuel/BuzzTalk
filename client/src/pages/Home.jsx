@@ -124,7 +124,7 @@ const Home = () => {
 
 
     return (
-        <div className='sm:p-3 p-3 relative flex flex-row min-h-screen'>
+        <div className='sm:p-3 p-2 relative flex flex-row min-h-screen'>
             <div className='sm:flex hidden text-white relative rounded  border-[#5f5f5f] '>
                 <Sidebar />
             </div>
@@ -168,7 +168,7 @@ const Home = () => {
                             <div className='w-full bg-[#1c1c24]  '>
                                 {
                                     allPost.map((post) => (
-                                        <Card key={post._id} {...post} like={LikePost} handleLike={handleLike} handleDelete={handleDelete} />
+                                        <Card key={post._id} {...post} like={LikePost} handleLike={handleLike} handleDelete={handleDelete} likepost={like} />
                                     ))
                                 }
                             </div>
@@ -176,7 +176,7 @@ const Home = () => {
                             <h1 className='text-center text-[#5f5f5f] mt-10'>No Post found</h1>
                         )}
                         <div className='w-full'>
-                            {deleted && <div className='bottom-0 fixed w-[90%] sm:w-[300px] align-center  rounded-t card h-[50px] text-[#eaeaea] p-3 border-t flex justify-between'>
+                            {deleted && <div className='bottom-3 fixed w-[92%] sm:w-[300px] align-center  rounded card h-[50px] text-[#eaeaea] p-3 border border-[#5f5f5f]  flex justify-between'>
                                 <h1>Post deleted</h1>
                                 <div>
                                     <AiOutlineClose className='text-[20px]' onClick={() => setDeleted(false)} />

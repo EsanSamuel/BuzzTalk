@@ -56,29 +56,29 @@ const Navbar = () => {
                 <div className='z-10 bg-[#1c1c24] p-10 rounded card top-0 left-0 border-r border-[#5f5f5f] overflow-auto flex flex-col fixed animate-slide-in sm:hidden'>
                     <div className='bg-transparent overflow-auto'>
                         <h1 className='text-[30px] px-3 logo flex gap-3 text-[#ead9d1]'><TbSocial className='bg-transparent text-[#00dbde]' />BuzzTalk</h1>
-                        <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer'>
-                           <Link to='/home' className='bg-transparent'> <li onClick={() => setIsActive(true)} className={`flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded ${isActive && 'bg-[#3a3a43] text-[#eaeaea]'}`}><AiOutlineHome className='text-[20px] bg-transparent' /><span className=''>Home</span></li></Link>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiCommunityLine className='text-[20px] bg-transparent' />Community</li>
-                            <Link to='/news' className='bg-transparent'><li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><RiNftFill className='text-[20px] bg-transparent' />News feed</li></Link>
-                            <li onClick={() => signin()} className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><BiNews className='text-[20px] bg-transparent' />Sign In</li>
+                        <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer '>
+                            <Link to='/home' className='bg-transparent'> <li onClick={() => setIsActive(true)} className={`flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded ${isActive && 'bg-[#8c6dfd] text-[#eaeaea]'}`}><AiOutlineHome className='text-[20px] bg-transparent' /><span className=''>Home</span></li></Link>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><RiCommunityLine className='text-[20px] bg-transparent' />Community</li>
+                            <Link to='/news' className='bg-transparent'><li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><RiNftFill className='text-[20px] bg-transparent' />News feed</li></Link>
+                            <li onClick={() => signin()} className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><BiNews className='text-[20px] bg-transparent' />Sign In</li>
                         </ul>
 
                         <hr className='w-full mt-5 text-[#e1d9d1]' />
 
                         <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer'>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Home</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Community</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Marketplace</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />News feed</li>
+                            <li onClick={() => signout()} className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Home</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Community</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Marketplace</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />News feed</li>
                         </ul>
 
                         <hr className='w-full mt-5' />
 
                         <ul className='flex flex-col mt-10 text-[#e1d9d1] space-y-3 cursor-pointer'>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Home</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Community</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Marketplace</li>
-                            <li className='flex gap-3 hover:bg-[#3a3a43] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />News feed</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Home</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Community</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />Marketplace</li>
+                            <li className='flex gap-3 hover:bg-[#8c6dfd] hover:text-[#eaeaea] p-3 rounded'><AiOutlineHome className='text-[20px] bg-transparent' />News feed</li>
                         </ul>
                     </div>
                 </div>

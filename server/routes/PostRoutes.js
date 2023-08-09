@@ -67,14 +67,11 @@ router.route('/').post(async (req, res) => {
 router.route('/:id').post(async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
-        if (!post) {
-            return res.status(404).json({ message: 'Item not found' });
-        }
-
+        
         post.likes += 1;
         await post.save();
 
-        res.json(item);
+        res.status(200).json({ success: true, message: 'Post liked successfully!' })
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

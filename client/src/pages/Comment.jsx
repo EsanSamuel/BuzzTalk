@@ -121,11 +121,6 @@ const Comment = () => {
     <div className='w-full text-[#ead9d1] sm:p-20 p-5' onSubmit={sendReplies}>
       <h1 className='text-center'>Replies to {name}'s post</h1>
 
-      <div className='p-10'>
-        <h1>{details}</h1>
-      </div>
-
-
       {allComments.map((comment) => (
         <div key={comment.id} className='p-2 rounded mt-5 flex gap-3 h-[80%]'>
           <img src={comment.ProfileImage} className='[w-40px] h-[40px] rounded-full bg-transparent' />
