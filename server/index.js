@@ -31,7 +31,7 @@ app.get('/', async (req, res) => {
     res.send('Hello from server!')
 })
 
-io.on('connection', (socket) => {
+/*io.on('connection', (socket) => {
     console.log(`Users connected to ${socket.id}`)
 
     socket.on('join_room', (data) => {
@@ -42,8 +42,7 @@ io.on('connection', (socket) => {
     socket.on('send_message', (data) => {
         socket.broadcast.emit('receive_message', data)
     })
-})
-
+})*/
 
 
 const startServer = async () => {

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Navbar, Sidebar } from '../components'
 import { Link } from 'react-router-dom'
 import { FaCommentDots, FaRetweet } from 'react-icons/fa'
-import { AiOutlineCamera, AiOutlineRetweet, AiFillEdit, AiOutlineVideoCameraAdd, AiOutlineSchedule } from 'react-icons/ai'
+import { AiOutlineCamera, AiOutlineRetweet, AiFillEdit, AiOutlineVideoCameraAdd, AiOutlineSchedule, AiOutlineClose } from 'react-icons/ai'
 import ClipLoader from "react-spinners/ClipLoader";
 import { BiEdit } from 'react-icons/bi'
 import { shorten } from '../utils/constant'
 import { BsThreeDots } from 'react-icons/bs'
+import axios from 'axios'
 
 const override = {
     display: "block",
@@ -19,7 +20,11 @@ const Home = () => {
     const [loading, setLoading] = useState(false)
     const [allPost, setAllPost] = useState(null)
     const [thread, setThread] = useState([])
+    const [deleted, setDeleted] = useState(false)
+    const [like, setLike] = useState(false)
 
+
+    //fetch post from the api after posting request in the createPost page
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true)
@@ -46,9 +51,10 @@ const Home = () => {
         fetchPosts()
     }, [])
 
+    //liking post
     const LikePost = async (id) => {
         try {
-            const response = await fetch('http://localhost:3001/api/v1/post', {
+            await fetch('http://localhost:3001/api/v1/post', {
                 method: 'Put',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,6 +78,30 @@ const Home = () => {
         }
     }
 
+    //liking post 2
+    /*const handleLike = async (itemId) => {
+        try {
+            const response = await axios.post(`http://localhost:3001/api/v1/post/${itemId}`);
+            const updatedItems = allPost.map((item) =>
+                item._id === response.data._id ? response.data : item
+            );
+            setAllPost(updatedItems);
+        } catch (error) {
+            console.error('Error liking item:', error);
+        }
+    };*/
+
+    const handleLike = async (id) => {
+        try {
+            const response = await axios.post(`http://localhost:3001/api/v1/post/${id}`);
+            console.log(response)
+            setLike(true);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    //fecthing news api
     useEffect(() => {
         fetch('https://newsapi.org/v2/everything?q=apple&from=2023-08-03&to=2023-08-03&sortBy=popularity&pageSize=10&apiKey=716a8281ffbf435f94206cf2c4b2c6b0')
             .then(res => res.json())
@@ -80,6 +110,17 @@ const Home = () => {
             })
     }, [])
 
+
+    //deleting posts
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:3001/api/v1/post/${id}`)
+            //console.log(response.data)
+            setDeleted(true)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
     return (
@@ -127,15 +168,24 @@ const Home = () => {
                             <div className='w-full bg-[#1c1c24]  '>
                                 {
                                     allPost.map((post) => (
-                                        <Card key={post._id} {...post} like={LikePost} />
+                                        <Card key={post._id} {...post} like={LikePost} handleLike={handleLike} handleDelete={handleDelete} />
                                     ))
                                 }
                             </div>
                         ) : (
                             <h1 className='text-center text-[#5f5f5f] mt-10'>No Post found</h1>
                         )}
+                        <div className='w-full'>
+                            {deleted && <div className='bottom-0 fixed w-[90%] sm:w-[300px] align-center  rounded-t card h-[50px] text-[#eaeaea] p-3 border-t flex justify-between'>
+                                <h1>Post deleted</h1>
+                                <div>
+                                    <AiOutlineClose className='text-[20px]' onClick={() => setDeleted(false)} />
+                                </div>
+                            </div>}
+                        </div>
 
                     </div>
+
 
 
 

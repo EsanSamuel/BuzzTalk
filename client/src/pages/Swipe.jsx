@@ -43,6 +43,7 @@ const Swipe = () => {
                     <Link to='/signin'>
                         <Button
                             title='Continue'
+                            styles='rounded-full'
                         />
                     </Link>
                 </div>

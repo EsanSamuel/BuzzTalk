@@ -5,17 +5,17 @@ import img3 from '../assets/img3.svg'
 export const data = [
     {
         id: 1,
-        text: 'Amazing',
+        text: ' Connect, Share, and Discover Together',
         image: img1,
     },
     {
         id: 2,
-        text: 'Amazing',
+        text: 'Express, Engage, and Stay Informed',
         image: img2,
     },
     {
         id: 3,
-        text: 'Amazing',
+        text: 'Connect, Network, and Advance Your social life',
         image: img3,
     },
 ]
@@ -23,5 +23,5 @@ export const data = [
 export const shorten = (address) =>
     `${address.slice(0, 25)}...`;
 
-    export const shorten2 = (address) =>
+export const shorten2 = (address) =>
     `${address.slice(0, 105)}...`;

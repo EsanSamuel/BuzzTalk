@@ -5,14 +5,15 @@ import io from 'socket.io-client'
 const socket = io.connect('http://localhost:3001')
 import { AuthContext } from '../Context/Auth'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Comment = () => {
   const [message, setMessage] = useState('')
   const [messageReceived, setMessageReceived] = useState([])
-  const { _id, name } = useParams()
+  const { _id, name, details } = useParams()
   const { users } = useContext(AuthContext)
   //const Date = new Date()
-  const [form, setForm] = useState({ name: users.displayName, comments: '', ProfileImage: users.photoURL, time: new Date() })
+  const [form, setForm] = useState({ name: users.displayName, comments: '', ProfileImage: users.photoURL, time: new Date().toLocaleDateString() })
   const [allComments, setAllComments] = useState([])
   const navigate = useNavigate()
 
@@ -74,8 +75,9 @@ const Comment = () => {
   }
 
   React.useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPosts = async (id) => {
       //setLoading(true)
+
 
       try {
         const response = await fetch(`http://localhost:3001/api/v1/comment`, {
@@ -100,9 +102,28 @@ const Comment = () => {
     fetchPosts()
   }, [])
 
+  /*React.useEffect(() => {
+    const response = async (id) => {
+      axios.get(`http://localhost:3001/api/v1/comment/${id}`)
+        .then(response => {
+          setAllComments(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+    response()
+
+  }, [])*/
+
+
   return (
     <div className='w-full text-[#ead9d1] sm:p-20 p-5' onSubmit={sendReplies}>
       <h1 className='text-center'>Replies to {name}'s post</h1>
+
+      <div className='p-10'>
+        <h1>{details}</h1>
+      </div>
 
 
       {allComments.map((comment) => (
@@ -110,7 +131,7 @@ const Comment = () => {
           <img src={comment.ProfileImage} className='[w-40px] h-[40px] rounded-full bg-transparent' />
           <div className=''>
             <p className='text-[12px] text-[#5f5f5f]'>{comment.name}</p>
-            {comment.comments}
+            <h1 className='text-[#eaeaea]'>{comment.comments}</h1>
             <p className='text-[12px] text-[#5f5f5f]'>{comment.time}</p>
           </div>
         </div>

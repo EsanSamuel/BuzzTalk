@@ -49,19 +49,49 @@ router.route('/').post(async (req, res) => {
     }
 })
 
-router.route('/').put(async (req, res) => {
+/*router.route('/').put(async (req, res) => {
     try {
-        const deleteposts = await Post.findByIdAndUpdate(req.body.postId,
+        const likePost = await Post.findByIdAndUpdate(req.body.postId,
             {
                 $push: { likes: req.user._id }
             }, {
             new: true
         })
 
-        res.status(200).json({ success: true, data: deleteposts })
+        res.status(200).json({ success: true, data: likePost })
     } catch (error) {
         res.status(500).json({ success: false, message: error })
     }
+})*/
+
+router.route('/:id').post(async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+
+        post.likes += 1;
+        await post.save();
+
+        res.json(item);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
+//delete post
+router.route('/:id').delete(async (req, res) => {
+    try {
+        const post = await Post.findByIdAndDelete(req.params.id)
+
+        //await post.remove()
+
+        res.status(200).json({ success: true, message: 'Post deleted successfully!' })
+    } catch (error) {
+        res.status(500).json({ success: false, message: error })
+    }
+
 })
 
 
