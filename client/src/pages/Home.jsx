@@ -124,7 +124,7 @@ const Home = () => {
 
 
     return (
-        <div className='sm:p-3 p-2 relative flex flex-row min-h-screen'>
+        <div className='sm:p-3 p-3 relative flex flex-row min-h-screen'>
             <div className='sm:flex hidden text-white relative rounded  border-[#5f5f5f] '>
                 <Sidebar />
             </div>
