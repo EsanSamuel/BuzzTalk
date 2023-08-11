@@ -53,8 +53,8 @@ const CreatePost = () => {
 
             try {
                 const response = await fetch('https://buzztalk-api.vercel.app/api/v1/post', {
-                    method: 'POST',
                     mode: 'no-cors',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         "Access-Control-Allow-Origin" : "*",
