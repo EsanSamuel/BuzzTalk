@@ -52,7 +52,7 @@ const CreatePost = () => {
             setLoading(true)
 
             try {
-                const response = await fetch('https://buzztalk-api.vercel.app/api/v1/post', {
+                const response = await fetch('https://buzz-talk-api-one.vercel.app/api/v1/post', {
                     mode: 'no-cors',
                     method: 'POST',
                     headers: {
