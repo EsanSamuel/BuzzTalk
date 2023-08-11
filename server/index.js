@@ -20,7 +20,9 @@ const io = new Server(server, {
     }
 })
 app.use(cors({
-    origin: 'https://buzz-talk-xi.vercel.app'
+    origin: 'https://buzz-talk-xi.vercel.app',
+    methods: 'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
 }))
 app.use(express.json({ limit: '50mb' }))
 
