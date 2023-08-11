@@ -52,7 +52,7 @@ const CreatePost = () => {
             setLoading(true)
 
             try {
-                const response = await fetch('https://buzz-talk-xi.vercel.app/api/v1/post', {
+                const response = await fetch('https://buzztalk-api.vercel.app/api/v1/post', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
